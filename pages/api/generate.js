@@ -1,7 +1,8 @@
 import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  // apiKey: process.env.OPENAI_API_KEY,
+  apiKey: "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"
 });
 const openai = new OpenAIApi(configuration);
 
@@ -11,7 +12,9 @@ export default async function (req, res) {
     temperature: 0.1,
     max_tokens: 150,
   });
-  res.status(200).json({ result: completion.data.choices[0].text });
+
+  res.status(200).json({ result: completion.data.choices[0].text });  
+  //res.status(200).json({ result: "TESTING" });  
 }
 
 function generatePrompt(animal) {
@@ -20,21 +23,21 @@ function generatePrompt(animal) {
   return `Suggest three stock tickers that would do well if the event happens
 
   Event: oil prices rise
-  Stocks:XLE, XOM, BP
+  Stocks: XLE, XOM, BP
   Event: bitcoin moons
-  Stocks:COIN, SQ, NVDA
+  Stocks: COIN, SQ, NVDA
   Event: genetic modification is successful
-  Stocks:CRSPR, EDIT, BEAM
+  Stocks: CRSPR, EDIT, BEAM
   Event: fast food companies are having high success with attracting new markets
-  Stocks:MCD, DPZ, YUM
+  Stocks: MCD, DPZ, YUM
   Event: we reach Mars
-  Stocks:SPCE, RKLB, BA
+  Stocks: SPCE, RKLB, BA
   Event: war breaks out
-  Stocks:ATK, BA, GD
+  Stocks: ATK, BA, GD
   Event: gas prices rise
-  Stocks:TSLA, CVX, DVN
+  Stocks: TSLA, CVX, DVN
   Event: covid is cured
-  Stocks:RCL, CCL, NCLH
+  Stocks: RCL, CCL, NCLH
   Event: consumers are trying to be healthier
   Stocks: PTON, SFM, BYND
   Event: trump wins reelection

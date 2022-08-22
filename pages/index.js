@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
+import Image from 'next/image'
+import Logo from "/public/IFTTB.png"
 
 import Tabsshow from './stockTicker.js'
 
@@ -9,6 +11,7 @@ export default function Home() {
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
+    
     event.preventDefault();
     const response = await fetch("/api/generate", {
       method: "POST",
@@ -17,23 +20,27 @@ export default function Home() {
       },
       body: JSON.stringify({ animal: animalInput }),
     });
+
     const data = await response.json();
+
     setResult("Buy These 3 Stocks:, " + data.result);
     setAnimalInput("");
 
+    console.log(data.result)
+
     let eachStock = data.result.split(", ");
 
-    eachStock[0]
-    eachStock[1]
-    {eachStock[2]}
+    // eachStock[0]
+    // eachStock[1]
+    // {eachStock[2]}
+    // console.log(eachStock);
 
-    console.log(eachStock);
   }
  
   return (
     
-    <div className ={styles.div}>
-
+    <div className={styles.div}>
+      
       <Head>
         <title>OpenAI Quickstart</title>
         <link
@@ -58,11 +65,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+
       <div className="top">
           <nav className="navbar navbar-expand-lg navbar-dark">
           <a class="navbar-brand" href="/">
-          <img width="100px" height="auto" img src="/ifttb.png" title="" alt="" />
-</a>
+          <Image width="100px" height="40px" src={Logo} title="" alt="" /> </a>
+            
             <button
               className="navbar-toggler"
               type="button"
